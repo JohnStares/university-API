@@ -12,7 +12,7 @@ class Courses(models.Model):
     updated_date = models.DateField(auto_now=True)
 
     departments = models.ForeignKey(Departments, related_name="departmental_courses", on_delete=models.CASCADE)
-    faculty = models.ForeignKey(Faculties, related_name="faculty_courses", on_delete=models.CASCADE)
+    faculty = models.ForeignKey(Faculties, related_name="faculty_courses", on_delete=models.CASCADE, null=True, blank=True)
 
 
     def __str__(self) -> str:

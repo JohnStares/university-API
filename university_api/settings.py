@@ -50,6 +50,9 @@ INSTALLED_APPS = [
     'authentication',
     'students',
     'lecturers',
+    'courses',
+    'faculty',
+    'departments',
     'rest_framework_simplejwt.token_blacklist'
 ]
 

@@ -9,4 +9,9 @@ students/migrations/__pycache__
 lecturers/__pycache__
 lecturers/migrations/__pycache__
 university_api/__pycache__
-
+departments/__pycache__
+departments/migrations/__pycache__
+courses/__pycache__
+courses/migrations/__pycache__
+faculty/__pycache__
+faculty/migrations/__pycache__

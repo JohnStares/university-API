@@ -1,0 +1,12 @@
+.env
+venv
+db.sqlite3
+.vscode
+authentication/__pycache__
+authentication/migrations/__pycache__
+students/__pycache__
+students/migrations/__pycache__
+lecturers/__pycache__
+lecturers/migrations/__pycache__
+university_api/__pycache__
+

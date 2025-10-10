@@ -7,7 +7,7 @@ from faculty.models import Faculties
 class Courses(models.Model):
     title = models.CharField(max_length=30, null=False, blank=False, unique=True)
     code = models.CharField(max_length=10, null=False, blank=False, unique=True)
-    units = models.IntegerField(max_length=3, null=False, blank=False)
+    units = models.IntegerField(null=False, blank=False)
     date_created = models.DateField(auto_now_add=True)
     updated_date = models.DateField(auto_now=True)
 

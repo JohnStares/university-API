@@ -13,6 +13,8 @@ from .serializers import (
     LoginSerializer
 )
 
+from departments.models import Departments
+
 # Create your views here.
 
 class StudentRegister(APIView):
@@ -23,11 +25,18 @@ class StudentRegister(APIView):
             serializer = StudentRegistrationSerializer(data=request.data)
 
             if serializer.is_valid():
-                serializer.save()
+                department = Departments.objects.get(name=serializer.validated_data["department"])
 
-                return Response({"msg": "Student Registration is successfully."}, status=status.HTTP_201_CREATED)
-            
+                if department:
+                    serializer.save(department=department)
+
+                    return Response({"msg": "Student Registration is successfully."}, status=status.HTTP_201_CREATED)
+                
             return Response({"error_msg": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        
+
+        except Departments.DoesNotExist:
+            return Response({"error_msg": "Department doesn't exist."}, status=status.HTTP_400_BAD_REQUEST)
         
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -41,11 +50,16 @@ class LecturerRegister(APIView):
             serializer = LecturerRegistrationSerializer(data=request.data)
 
             if serializer.is_valid():
-                serializer.save()
+                department = Departments.objects.get(name=serializer.validated_data["department"])
+
+                serializer.save(department=department)
 
                 return Response({"msg": "Lecturer Registration is successfully."}, status=status.HTTP_201_CREATED)
             
             return Response({"error_msg": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+        
+        except Departments.DoesNotExist:
+            return Response({"error_msg": "Department doesn't exist"}, status=status.HTTP_400_BAD_REQUEST)
         
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 
-
 from students.models import Student
 from lecturers.models import Lecturer
 from .models import CustomUser
@@ -18,10 +17,11 @@ class StudentRegistrationSerializer(serializers.ModelSerializer):
     mat_no = serializers.CharField(write_only=True, required=True)
     date_of_birth = serializers.DateField(write_only=True, required=True, input_formats=['%d-%m-%Y', '%Y-%m-%d', '%d/%m/%Y', '%Y/%m/%d'])
     gender = serializers.CharField(write_only=True, required=True)
+    department = serializers.CharField(required=True, write_only=True)
 
     class Meta:
         model = Student
-        fields = ["first_name", "last_name", "email", "mat_no", "date_of_birth", "gender", "password", "password2"]
+        fields = ["first_name", "last_name", "email", "mat_no", "department", "date_of_birth", "gender", "password", "password2"]
 
     def validate(self, attrs):
         if attrs["password"] != attrs["password2"]:
@@ -57,6 +57,7 @@ class LecturerRegistrationSerializer(serializers.ModelSerializer):
     email = serializers.CharField(write_only=True, required=True)
     password = serializers.CharField(write_only=True, required=True)
     password2 = serializers.CharField(write_only=True, required=True)
+    department = serializers.CharField(write_only=True, required=True)
 
 
     # Lecturer fields
@@ -66,7 +67,7 @@ class LecturerRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lecturer
-        fields = ["first_name", "last_name", "email", "password", "password2", "title", "date_of_birth", "gender"]
+        fields = ["first_name", "last_name", "email", "password", "password2", "title", "department", "date_of_birth", "gender"]
 
 
     def validate(self, attrs):

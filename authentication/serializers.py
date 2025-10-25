@@ -57,6 +57,7 @@ class LecturerRegistrationSerializer(serializers.ModelSerializer):
     email = serializers.CharField(write_only=True, required=True)
     password = serializers.CharField(write_only=True, required=True)
     password2 = serializers.CharField(write_only=True, required=True)
+    department = serializers.CharField(write_only=True, required=True)
 
 
     # Lecturer fields
@@ -66,7 +67,7 @@ class LecturerRegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Lecturer
-        fields = ["first_name", "last_name", "email", "password", "password2", "title", "date_of_birth", "gender"]
+        fields = ["first_name", "last_name", "email", "password", "password2", "title", "department", "date_of_birth", "gender"]
 
 
     def validate(self, attrs):

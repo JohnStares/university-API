@@ -17,7 +17,7 @@ class LecturerProfileSerializer(serializers.ModelSerializer):
         fields = ["first_name", "last_name", "username", "email", "department", "date_of_birth", "title", "gender"]
 
 
-class StudentUseProfile(serializers.ModelSerializer):
+class StudentUserProfile(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ["id", "first_name", "last_name", "email", "username"]
@@ -30,7 +30,7 @@ class CoursesSerializer(serializers.ModelSerializer):
 
 
 class StudentProfileSerializer(serializers.ModelSerializer):
-    user = StudentUseProfile()
+    user = StudentUserProfile()
     courses = CoursesSerializer(many=True)
     class Meta:
         model = Student
